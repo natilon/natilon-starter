@@ -8,26 +8,44 @@ build, moved pages keep their old paths as real 301s.
 
 [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/natilon/natilon-starter)
 
-## After the deploy button (two manual steps)
+## After the deploy button: two secrets, and you're done
 
-The button clones this repo into your GitHub account, provisions the KV
-namespace and deploys the Worker. Two things it cannot do for you:
+The button clones this repo into your GitHub account (any name you pick —
+the build auto-detects it), connects builds so **every push to `main`
+redeploys**, and deploys the Worker. The site is live immediately; the
+admin needs two secrets it cannot invent for you:
 
-1. **Point the CMS at your clone** — edit `cms.config.mjs`:
-   ```js
-   owner: "your-github-user",
-   repo:  "your-repo-name",
-   ```
-2. **Set the secrets** (`npx wrangler secret put <NAME> -c worker/wrangler.jsonc`):
-   - `GITHUB_TOKEN` — a [fine-grained PAT](https://github.com/settings/personal-access-tokens)
-     with read/write **Contents** permission on your clone (this is how the
-     CMS reads and writes your content)
-   - `ADMIN_PASS` — the admin panel password
-   - `RESEND_API_KEY` — optional, for the contact form
-     (verify your sender domain at [resend.com](https://resend.com) and set
-     `mail.from` in `cms.config.mjs`)
+### 1. Create a GitHub token (this is how the CMS writes your content)
 
-Then open `https://<your-worker>.workers.dev/admin/` and sign in as `admin`.
+GitHub → Settings → Developer settings → Personal access tokens →
+[**Fine-grained tokens**](https://github.com/settings/personal-access-tokens)
+→ Generate new token:
+
+- **Repository access:** *Only select repositories* → your clone
+- **Permissions → Repository permissions → Contents:** *Read and write*
+
+Copy the token — you'll paste it in the next step.
+
+### 2. Add the secrets to the Worker
+
+In the Cloudflare dashboard: **Workers & Pages → your worker → Settings →
+Variables and Secrets → Add**, type **Secret**:
+
+| Name             | Value                                   |
+| ---------------- | --------------------------------------- |
+| `GITHUB_TOKEN`   | the token from step 1                   |
+| `ADMIN_PASS`     | the admin panel password you choose     |
+| `RESEND_API_KEY` | *optional* — contact-form delivery ([resend.com](https://resend.com); also set `mail.from` in `cms.config.mjs`) |
+
+Secrets take effect immediately — no redeploy needed. Prefer the terminal?
+`npx wrangler secret put GITHUB_TOKEN -c worker/wrangler.jsonc` does the same.
+
+**Verify:** open `https://<your-worker>.workers.dev/admin/` and sign in as
+`admin` with your `ADMIN_PASS`.
+
+> **Troubleshooting:** if the admin says it can't reach the content repo,
+> add a plain variable `GITHUB_REPO` = `your-user/your-repo` next to the
+> secrets — that overrides the build-time auto-detection.
 
 ## Five things to try first
 

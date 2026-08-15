@@ -8,10 +8,28 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { execSync } from "node:child_process";
 import { createRequire } from "node:module";
 
 const require = createRequire(import.meta.url);
 const dist = path.resolve("dist");
+
+// ── Which repo holds the content? Detected, not asked. ────────────────────
+// The build runs inside the clone, so the origin remote already knows the
+// answer — whatever name the user picked in the deploy flow. Written to
+// worker/repo.json and merged into the config by worker/index.mjs. When
+// detection fails (no git, no remote), the GITHUB_REPO variable on the
+// worker is the fallback.
+try {
+  const url = execSync("git config --get remote.origin.url", { encoding: "utf8" }).trim();
+  const match = url.replace(/\.git$/, "").match(/[/:]([^/:]+)\/([^/:]+)$/);
+  if (match) {
+    fs.writeFileSync("worker/repo.json", JSON.stringify({ owner: match[1], repo: match[2] }, null, 2) + "\n");
+    console.log(`content repo → ${match[1]}/${match[2]} (auto-detected from origin)`);
+  }
+} catch {
+  console.warn("content repo could not be auto-detected — set the GITHUB_REPO variable on the worker");
+}
 
 const adminSrc = path.dirname(require.resolve("@natilon/admin-ui/dist/index.html"));
 const adminDest = path.join(dist, "admin");

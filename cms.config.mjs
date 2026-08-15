@@ -12,11 +12,13 @@ export default {
     provider: process.env.GITHUB_CONTENT === "true" ? "github" : "fs",
     githubTokenEnv: "GITHUB_TOKEN",
 
-    // ── EDIT AFTER DEPLOY ──────────────────────────────────────────────
-    // Set these to the repository the deploy button created for you:
+    // Which repository holds the content. Normally you never touch these:
+    // the build auto-detects the clone's own repo from its git remote
+    // (worker/repo.json), and the GITHUB_REPO variable on the worker can
+    // override at runtime. Fill them in only if content lives in a
+    // DIFFERENT repository than this code.
     owner: "REPLACE_GITHUB_OWNER",
     repo: "REPLACE_GITHUB_REPO",
-    // ───────────────────────────────────────────────────────────────────
 
     branch: "main",
     // Saves land here; Publish moves pages onto `branch`. Created
