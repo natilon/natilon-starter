@@ -1,0 +1,75 @@
+/**
+ * The content model and CMS settings for this site — the one file that grows
+ * with the site. Everything (admin forms, validation, the Astro content
+ * schema) is derived from it.
+ */
+export default {
+  locales: ["en"],
+  defaultLocale: "en",
+
+  content: {
+    // Local dev edits files on disk; the deployed Worker talks to GitHub.
+    provider: process.env.GITHUB_CONTENT === "true" ? "github" : "fs",
+    githubTokenEnv: "GITHUB_TOKEN",
+
+    // ── EDIT AFTER DEPLOY ──────────────────────────────────────────────
+    // Set these to the repository the deploy button created for you:
+    owner: "REPLACE_GITHUB_OWNER",
+    repo: "REPLACE_GITHUB_REPO",
+    // ───────────────────────────────────────────────────────────────────
+
+    branch: "main",
+    // Saves land here; Publish moves pages onto `branch`. Created
+    // automatically on first save. Without it, saving a live page would
+    // publish it instantly.
+    draftBranch: "cms-drafts",
+    pagesDir: "src/pages-data",
+    assetsDir: "public/images",
+    publishBranch: "main",
+    publishPaths: ["src/pages-data"],
+    commitMessage: (ts) => `Content update ${ts}`,
+  },
+
+  auth: {
+    provider: "basic",
+    users: [
+      { user: "admin", passEnv: "ADMIN_PASS", role: "admin" },
+    ],
+  },
+
+  // Contact form → email via Resend (https://resend.com — verify your domain
+  // there, then set the RESEND_API_KEY secret).
+  mail: { from: "Website <forms@example.com>" },
+  forms: {
+    contact: {
+      to: "hello@example.com",
+      subject: (fields) => `New message — ${fields["Name"] ?? "website"}`,
+      replyTo: "Email",
+      redirect: "/thanks/",
+    },
+  },
+
+  // Media CDN — optional. Without it, images live in public/images and are
+  // picked from the local assets list in the admin.
+  // media: { cdnBase: "https://cdn.example.com", tenantId: "your-tenant" },
+
+  // Site-specific block: the contact form. The site's [...slug].astro maps
+  // it to its own component; the editor just places it.
+  blocks: {
+    "contact-form": { label: "Contact form", properties: {}, defaults: {} },
+  },
+
+  collections: {
+    pages: {
+      label: "Pages",
+      listFields: [{ key: "title" }, { key: "slug" }],
+      metaFields: [
+        { key: "title", label: "Title", type: "text", required: true },
+        { key: "description", label: "Description", type: "textarea" },
+        { key: "parent", label: "Parent page (slug)", type: "text" },
+        { key: "redirectFrom", label: "Old paths (301 here)", type: "string-list" },
+      ],
+      sort: { field: "title", direction: "asc" },
+    },
+  },
+};

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 280" role="img" aria-label="Three-person team illustration">
+  <rect width="640" height="280" rx="12" fill="#e6ecf5"/>
+  <g fill="#23508f" opacity="0.85">
+    <circle cx="180" cy="110" r="34"/>
+    <rect x="132" y="152" width="96" height="70" rx="16"/>
+    <circle cx="320" cy="96" r="38"/>
+    <rect x="266" y="142" width="108" height="80" rx="16"/>
+    <circle cx="458" cy="112" r="32"/>
+    <rect x="414" y="152" width="88" height="70" rx="16"/>
+  </g>
+  <rect x="60" y="238" width="520" height="6" rx="3" fill="#23508f" opacity="0.25"/>
+</svg>

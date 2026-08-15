@@ -1,0 +1,17 @@
+{
+  "id": "en/web-design",
+  "slug": "web-design",
+  "lang": "en",
+  "collection": "pages",
+  "meta": {
+    "title": "Web design",
+    "description": "Calm, fast, content-first web design.",
+    "parent": "services",
+    "redirectFrom": ["/old-web-design"]
+  },
+  "blocks": [
+    { "id": "b1", "type": "text", "properties": { "content": "<p>This page demonstrates two things at once. First, it lives under <strong>/services/</strong> because its <em>parent</em> field says so. Second, it used to live at <strong>/old-web-design</strong> — that path is listed in the page's \"Old paths\" field, and the worker answers it with a real 301. Try it.</p>" } },
+    { "id": "b2", "type": "heading", "properties": { "text": "How we work", "level": 2, "spacingTop": "medium" } },
+    { "id": "b3", "type": "list", "properties": { "ordered": true, "items": ["Understand the content first", "Design a system, not pages", "Ship, measure, adjust"] } }
+  ]
+}

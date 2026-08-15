@@ -1,0 +1,42 @@
+---
+import { getCollection } from "astro:content";
+import BlockRenderer from "@natilon/astro-blocks";
+import Base from "../layouts/Base.astro";
+import ContactForm from "../components/ContactForm.astro";
+
+export async function getStaticPaths() {
+  const all = await getCollection("pages");
+  const bySlug = new Map(all.map((e) => [e.data.slug, e]));
+
+  // Pages are served under their ancestor chain: a page whose `parent`
+  // names another page's slug lives below it (/services/web-design/).
+  const pathOf = (entry) => {
+    const parts = [entry.data.slug];
+    const seen = new Set(parts);
+    let cur = entry;
+    while (cur.data.parent && !seen.has(cur.data.parent)) {
+      const parent = bySlug.get(cur.data.parent);
+      if (!parent) break;
+      parts.unshift(parent.data.slug);
+      seen.add(parent.data.slug);
+      cur = parent;
+    }
+    return parts.join("/");
+  };
+
+  const HOME = "home";
+  return all
+    .filter((entry) => !entry.data.draft) // drafts stay out of the build
+    .map((entry) => ({
+      params: { slug: entry.data.slug === HOME ? undefined : pathOf(entry) },
+      props: { entry },
+    }));
+}
+
+const { entry } = Astro.props;
+---
+
+<Base title={entry.data.title} description={entry.data.description}>
+  <h1>{entry.data.title}</h1>
+  <BlockRenderer blocks={entry.data.blocks} components={{ "contact-form": ContactForm }} />
+</Base>

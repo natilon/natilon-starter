@@ -1,0 +1,24 @@
+{
+  "id": "en/home",
+  "slug": "home",
+  "lang": "en",
+  "collection": "pages",
+  "meta": {
+    "title": "We build calm, fast websites",
+    "description": "Acme Studio — a small team building content sites that stay correct after handoff."
+  },
+  "blocks": [
+    { "id": "b1", "type": "text", "properties": { "content": "<p>Acme Studio is a demo site for the <strong>Natilon CMS starter</strong>. Everything you see here is editable: open <a href=\"/admin/\">the admin panel</a>, change this paragraph, hit <em>Save</em> — the live site won't move until you press <em>Publish</em>.</p>" } },
+    { "id": "b2", "type": "heading", "properties": { "text": "What's inside", "level": 2, "spacingTop": "medium" } },
+    {
+      "id": "b3",
+      "type": "columns",
+      "properties": { "columnCount": 2, "width1": "1/2" },
+      "children": [
+        [ { "id": "b3a", "type": "text", "properties": { "content": "<p><strong>For editors:</strong> a block editor with drafts, per-page publishing and scheduled publish. Try editing the draft page in the admin — it exists there, not here.</p>" } } ],
+        [ { "id": "b3b", "type": "text", "properties": { "content": "<p><strong>For developers:</strong> every record is a JSON file in this repo, every publish is a git commit, and the whole thing — site, API, admin — is one Cloudflare Worker.</p>" } } ]
+      ]
+    },
+    { "id": "b4", "type": "button", "properties": { "text": "See our services", "href": "/services/", "spacingTop": "small" } }
+  ]
+}

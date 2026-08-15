@@ -1,0 +1,14 @@
+{
+  "id": "en/services",
+  "slug": "services",
+  "lang": "en",
+  "collection": "pages",
+  "meta": {
+    "title": "Services",
+    "description": "What we do, in plain words."
+  },
+  "blocks": [
+    { "id": "b1", "type": "text", "properties": { "content": "<p>We keep our offering small and sharp. Each service has its own page — note the URL: child pages live under this one, like <a href=\"/services/web-design/\">/services/web-design/</a>. That's the ancestor chain at work.</p>" } },
+    { "id": "b2", "type": "list", "properties": { "ordered": false, "items": ["Web design — see the child page", "Content migration with word-for-word verification", "Care plans for handed-off sites"], "spacingTop": "small" } }
+  ]
+}

@@ -1,0 +1,80 @@
+/* Deliberately small: the starter's job is to be redesigned. */
+:root {
+  --paper: #fbfaf8;
+  --ink: #23282e;
+  --ink-soft: #5d6670;
+  --line: #e3e1dc;
+  --brand: #23508f;
+  --brand-tint: #e6ecf5;
+  --radius: 8px;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  line-height: 1.65;
+}
+
+.site-header {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 1rem; flex-wrap: wrap;
+  max-width: 46rem; margin: 0 auto; padding: 1.4rem 1.25rem 0;
+}
+.brand { font-weight: 700; color: var(--ink); text-decoration: none; font-size: 1.05rem; }
+.site-header nav { display: flex; gap: 1.1rem; }
+.site-header nav a {
+  color: var(--ink-soft); text-decoration: none; font-size: 0.95rem;
+}
+.site-header nav a:hover { color: var(--brand); }
+.site-header nav a[aria-current="page"] { color: var(--brand); font-weight: 600; }
+
+main.prose { max-width: 46rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+.prose h1 { font-size: 2rem; line-height: 1.15; letter-spacing: -0.015em; margin: 0.5rem 0 1rem; }
+.prose h2 { font-size: 1.4rem; margin: 2rem 0 0.6rem; }
+.prose img { max-width: 100%; border-radius: var(--radius); }
+.prose blockquote {
+  margin: 1.5rem 0; padding: 0.2rem 1.2rem;
+  border-left: 3px solid var(--brand); color: var(--ink-soft);
+}
+.prose a { color: var(--brand); }
+
+/* Spacing tokens from the CMS — the design decides what a step means. */
+.block-spacing[data-spacing="small"] { margin-bottom: 1rem; }
+.block-spacing[data-spacing="medium"] { margin-bottom: 2.5rem; }
+.block-spacing[data-spacing="large"] { margin-bottom: 5rem; }
+.block-spacing[data-spacing="none"] { margin-bottom: 0; }
+.block-spacing[data-spacing-top="small"] { margin-top: 1rem; }
+.block-spacing[data-spacing-top="medium"] { margin-top: 2.5rem; }
+.block-spacing[data-spacing-top="large"] { margin-top: 5rem; }
+.block-spacing > * { margin-bottom: 0; }
+
+/* Contact form */
+.contact-form { max-width: 30rem; }
+.contact-form .hp { display: none !important; }
+.contact-form .field { margin-bottom: 1rem; }
+.contact-form label { display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.3rem; }
+.contact-form input, .contact-form textarea {
+  width: 100%; padding: 0.65rem 0.8rem; font: inherit;
+  border: 1px solid var(--line); border-radius: var(--radius); background: #fff;
+}
+.contact-form input:focus, .contact-form textarea:focus {
+  outline: none; border-color: var(--brand); box-shadow: 0 0 0 3px var(--brand-tint);
+}
+.contact-form button {
+  padding: 0.7rem 1.6rem; border: 0; border-radius: var(--radius);
+  background: var(--brand); color: #fff; font: inherit; font-weight: 600; cursor: pointer;
+}
+.contact-form button[disabled] { opacity: 0.6; }
+.cf-status[data-state="ok"] { color: #1b6b3a; }
+.cf-status[data-state="error"] { color: #a12a1f; }
+
+.site-footer {
+  max-width: 46rem; margin: 0 auto; padding: 1.2rem 1.25rem 2.5rem;
+  border-top: 1px solid var(--line);
+  display: flex; justify-content: space-between; gap: 1rem;
+  font-size: 0.85rem; color: var(--ink-soft);
+}
+.site-footer a { color: var(--ink-soft); }

@@ -1,0 +1,34 @@
+{
+  "name": "natilon-starter",
+  "main": "index.mjs",
+  "compatibility_date": "2025-05-01",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // One assets directory carries both the site (dist/) and the admin SPA
+  // (dist/admin/, copied there by scripts/postbuild.mjs). A request matching
+  // a real file is served by the platform WITHOUT running the worker; every
+  // miss falls through to the worker — which is where redirects, the API,
+  // the admin SPA fallback and the 404 page live. Deliberately NO
+  // `not_found_handling` here: it would answer misses at the asset layer and
+  // the redirect middleware would never see them.
+  "assets": {
+    "directory": "../dist",
+    "binding": "ASSETS"
+  },
+
+  // Page templates. The deploy button provisions this automatically; for a
+  // manual setup: npx wrangler kv namespace create TEMPLATES_KV
+  "kv_namespaces": [
+    { "binding": "TEMPLATES_KV", "id": "REPLACE_KV_NAMESPACE_ID" }
+  ],
+
+  // Scheduled publish: pages whose publish date has passed go live.
+  "triggers": { "crons": ["* * * * *"] },
+
+  "observability": { "enabled": true }
+
+  // Secrets — npx wrangler secret put <NAME> -c worker/wrangler.jsonc
+  //   GITHUB_TOKEN     fine-grained PAT with read/write Contents on THIS repo
+  //   ADMIN_PASS       admin panel password
+  //   RESEND_API_KEY   (optional) contact-form delivery
+}

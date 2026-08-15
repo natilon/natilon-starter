@@ -1,0 +1,60 @@
+---
+/**
+ * Posts to the CMS forms endpoint (POST /api/forms/contact) — same worker,
+ * same origin. Works without JavaScript: a plain submit gets a 303 to
+ * /thanks/. With JavaScript, the response stays on the page.
+ * Delivery is configured in cms.config.mjs (`mail` + `forms.contact`).
+ */
+---
+
+<form class="contact-form" method="POST" action="/api/forms/contact">
+  {/* Honeypot: humans never see it, bots fill it, the server drops it. */}
+  <p class="hp" hidden>
+    <label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+  </p>
+
+  <div class="field">
+    <label for="cf-name">Name</label>
+    <input id="cf-name" name="Name" type="text" required autocomplete="name" />
+  </div>
+  <div class="field">
+    <label for="cf-email">Email</label>
+    <input id="cf-email" name="Email" type="email" required autocomplete="email" />
+  </div>
+  <div class="field">
+    <label for="cf-message">Message</label>
+    <textarea id="cf-message" name="Message" rows="6" required></textarea>
+  </div>
+
+  <button type="submit">Send</button>
+  <p class="cf-status" role="status" aria-live="polite"></p>
+</form>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>("form.contact-form").forEach((form) => {
+    const status = form.querySelector<HTMLElement>(".cf-status");
+    const button = form.querySelector<HTMLButtonElement>("button[type=submit]");
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!status || !button) return;
+      status.textContent = "";
+      button.disabled = true;
+      try {
+        const res = await fetch(form.action, {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams(new FormData(form) as any).toString(),
+        });
+        if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error ?? String(res.status));
+        form.reset();
+        status.dataset.state = "ok";
+        status.textContent = "Message sent — we'll get back to you soon.";
+      } catch (err) {
+        status.dataset.state = "error";
+        status.textContent = `Could not send: ${err instanceof Error ? err.message : "unknown error"}`;
+      } finally {
+        button.disabled = false;
+      }
+    });
+  });
+</script>

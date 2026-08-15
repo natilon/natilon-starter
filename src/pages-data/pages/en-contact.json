@@ -1,0 +1,14 @@
+{
+  "id": "en/contact",
+  "slug": "contact",
+  "lang": "en",
+  "collection": "pages",
+  "meta": {
+    "title": "Contact",
+    "description": "Say hello — the form delivers by email."
+  },
+  "blocks": [
+    { "id": "b1", "type": "text", "properties": { "content": "<p>This form posts to the CMS's own forms endpoint on the same worker — no third-party form service. Delivery needs a <code>RESEND_API_KEY</code> secret; until it's set, submitting returns an honest error instead of silently dropping your message.</p>", "spacing": "small" } },
+    { "id": "b2", "type": "contact-form", "properties": {} }
+  ]
+}

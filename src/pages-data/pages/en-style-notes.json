@@ -1,0 +1,14 @@
+{
+  "id": "en/style-notes",
+  "slug": "style-notes",
+  "lang": "en",
+  "collection": "pages",
+  "meta": {
+    "title": "Style notes (draft)",
+    "description": "A page that exists only in the admin.",
+    "draft": true
+  },
+  "blocks": [
+    { "id": "b1", "type": "text", "properties": { "content": "<p>You're seeing this in the admin because it's a <strong>draft</strong>: it's saved, versioned and previewable — and completely absent from the built site. Flip the draft toggle and publish to take it live.</p>" } }
+  ]
+}
