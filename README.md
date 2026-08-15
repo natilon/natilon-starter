@@ -61,8 +61,16 @@ npm run deploy                # build + deploy to Cloudflare
 
 ```bash
 npm install
-npx wrangler kv namespace create TEMPLATES_KV   # put the id in worker/wrangler.jsonc
 # set the secrets listed above
+npm run deploy
+```
+
+**Optional — page templates** (reusable block sets in the admin). Everything
+works without this; the templates list is just empty:
+
+```bash
+npx wrangler kv namespace create TEMPLATES_KV
+# → uncomment kv_namespaces in worker/wrangler.jsonc with the printed id
 npm run deploy
 ```
 

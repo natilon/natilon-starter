@@ -16,11 +16,15 @@
     "binding": "ASSETS"
   },
 
-  // Page templates. The deploy button provisions this automatically; for a
-  // manual setup: npx wrangler kv namespace create TEMPLATES_KV
-  "kv_namespaces": [
-    { "binding": "TEMPLATES_KV", "id": "REPLACE_KV_NAMESPACE_ID" }
-  ],
+  // OPTIONAL — page templates (reusable block sets in the admin). The CMS
+  // runs fine without this: the templates list is just empty. To enable:
+  //   npx wrangler kv namespace create TEMPLATES_KV
+  // then uncomment with the id it prints. Deliberately not present by
+  // default: the deploy button does not provision KV, and a placeholder id
+  // fails the whole deploy.
+  // "kv_namespaces": [
+  //   { "binding": "TEMPLATES_KV", "id": "<your-kv-namespace-id>" }
+  // ],
 
   // Scheduled publish: pages whose publish date has passed go live.
   "triggers": { "crons": ["* * * * *"] },

@@ -21,8 +21,8 @@ const { redirects, problems } = collectRedirects({ source: docs, pathOf });
 for (const p of problems) console.warn(`[redirects] ${p}`);
 
 // Broken internal links surface at build time as warnings, with the page
-// they live on. /thanks/ exists outside the content model.
-const { broken } = checkInternalLinks(docs, { pathOf, redirects, extraPaths: ["/thanks/"] });
+// they live on. /thanks/ and /admin/ exist outside the content model.
+const { broken } = checkInternalLinks(docs, { pathOf, redirects, extraPaths: ["/thanks/", "/admin/"] });
 for (const b of broken) console.warn(`[links] broken internal link: ${b.source} → ${b.href}`);
 
 export default defineConfig({
