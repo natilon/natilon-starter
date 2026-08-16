@@ -1,11 +1,11 @@
 import { defineConfig } from "astro/config";
-import natilon, {
+import stelstone, {
   collectRedirects,
   hierarchicalPathOf,
   workerRedirects,
   checkInternalLinks,
   readContentDirs,
-} from "@natilon/astro-cms";
+} from "stelstone";
 import cmsConfig from "./cms.config.mjs";
 
 // Redirects are generated from content: a page whose `parent` gives it a
@@ -28,7 +28,7 @@ for (const b of broken) console.warn(`[links] broken internal link: ${b.source} 
 export default defineConfig({
   site: "https://example.com",
   integrations: [
-    natilon({ config: cmsConfig }),
+    stelstone({ config: cmsConfig }),
     workerRedirects(redirects),
   ],
 });

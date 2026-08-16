@@ -12,7 +12,7 @@
  * file — which is exactly where the API, redirects, the admin SPA fallback
  * and the 404 page live.
  */
-import { createCmsWorker, createRedirects } from "@natilon/cms-worker";
+import { createCmsWorker, createRedirects } from "@stelstone/worker";
 import config from "../cms.config.mjs";
 import redirectMap from "./redirects.json";
 import repoInfo from "./repo.json";
@@ -20,7 +20,7 @@ import repoInfo from "./repo.json";
 // Content-repo coordinates, in precedence order: an explicit value in
 // cms.config wins; otherwise the build-time auto-detection from the git
 // remote (repo.json); the GITHUB_REPO variable can still override both at
-// request time (see @natilon/cms-server adapter options).
+// request time (see @stelstone/server adapter options).
 const content = { ...config.content };
 if ((!content.owner || content.owner.startsWith("REPLACE")) && repoInfo.owner) content.owner = repoInfo.owner;
 if ((!content.repo || content.repo.startsWith("REPLACE")) && repoInfo.repo) content.repo = repoInfo.repo;

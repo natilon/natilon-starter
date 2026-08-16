@@ -1,6 +1,6 @@
 // Generated from cms.config.mjs — safe to commit and customize.
 import { defineCollection, z } from "astro:content";
-import { jsonContentLoader, buildCollectionSchema } from "@natilon/astro-cms";
+import { jsonContentLoader, buildCollectionSchema } from "stelstone";
 import config from "../cms.config.mjs";
 
 export const collections = Object.fromEntries(

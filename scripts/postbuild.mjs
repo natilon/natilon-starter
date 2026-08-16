@@ -2,7 +2,7 @@
  * Compose the single assets directory the Worker serves.
  *
  * A Worker has ONE assets binding, so the site (dist/) and the admin SPA
- * (@natilon/admin-ui/dist) must share it: the admin is copied to dist/admin.
+ * (@stelstone/admin-ui/dist) must share it: the admin is copied to dist/admin.
  * If the site ever gains a page whose path starts with /admin, the copy
  * would shadow it — fail loudly instead of letting two things own one path.
  */
@@ -31,14 +31,14 @@ try {
   console.warn("content repo could not be auto-detected — set the GITHUB_REPO variable on the worker");
 }
 
-const adminSrc = path.dirname(require.resolve("@natilon/admin-ui/dist/index.html"));
+const adminSrc = path.dirname(require.resolve("@stelstone/admin-ui/dist/index.html"));
 const adminDest = path.join(dist, "admin");
 
 if (fs.existsSync(adminDest)) {
   // Astro built a page at /admin — that path belongs to the panel.
   const marker = path.join(adminDest, "index.html");
   const html = fs.existsSync(marker) ? fs.readFileSync(marker, "utf8") : "";
-  if (!html.includes("natilon")) {
+  if (!/natilon|stelstone/i.test(html)) {
     console.error("dist/admin already exists — a site page is using the /admin path reserved for the panel.");
     process.exit(1);
   }
