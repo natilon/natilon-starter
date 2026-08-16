@@ -1,5 +1,5 @@
 {
-  "name": "natilon-starter",
+  "name": "stelstone-starter",
   "main": "index.mjs",
   "compatibility_date": "2025-05-01",
   "compatibility_flags": ["nodejs_compat"],

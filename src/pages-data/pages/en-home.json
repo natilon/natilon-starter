@@ -8,7 +8,7 @@
     "description": "Acme Studio — a small team building content sites that stay correct after handoff."
   },
   "blocks": [
-    { "id": "b1", "type": "text", "properties": { "content": "<p>Acme Studio is a demo site for the <strong>Natilon CMS starter</strong>. Everything you see here is editable: open <a href=\"/admin/\">the admin panel</a>, change this paragraph, hit <em>Save</em> — the live site won't move until you press <em>Publish</em>.</p>" } },
+    { "id": "b1", "type": "text", "properties": { "content": "<p>Acme Studio is a demo site for the <strong>Stelstone starter</strong>. Everything you see here is editable: open <a href=\"/admin/\">the admin panel</a>, change this paragraph, hit <em>Save</em> — the live site won't move until you press <em>Publish</em>.</p>" } },
     { "id": "b2", "type": "heading", "properties": { "text": "What's inside", "level": 2, "spacingTop": "medium" } },
     {
       "id": "b3",

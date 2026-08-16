@@ -1,12 +1,12 @@
-# Natilon Starter
+# Stelstone Starter
 
-An Astro site and the [Natilon CMS](https://github.com/natilon/cms) admin panel,
+An Astro site and the [Stelstone](https://github.com/natilon/stelstone) admin panel,
 deployed as **one Cloudflare Worker**. Every record is a JSON file in this
 repo, every publish is a git commit, and an editor can't break the site:
 saving doesn't publish, internal links are picked from a list and verified at
 build, moved pages keep their old paths as real 301s.
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/natilon/natilon-starter)
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/natilon/stelstone-starter)
 
 ## After the deploy button: two secrets, and you're done
 

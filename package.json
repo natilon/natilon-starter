@@ -1,9 +1,9 @@
 {
-  "name": "natilon-starter",
+  "name": "stelstone-starter",
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Astro site + Natilon CMS admin, deployed as one Cloudflare Worker.",
+  "description": "Astro site + the Stelstone admin, deployed as one Cloudflare Worker.",
   "scripts": {
     "dev": "node --env-file-if-exists=.env node_modules/.bin/astro dev",
     "build": "astro build && node scripts/postbuild.mjs",
