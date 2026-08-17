@@ -29,7 +29,13 @@ export default {
     assetsDir: "public/images",
     publishBranch: "main",
     publishPaths: ["src/pages-data"],
-    commitMessage: (ts) => `Content update ${ts}`,
+        commitMessage: (ts) => `Content update ${ts}`,
+    // The GitHub backend lists entries from per-collection _index.json
+    // manifests. "lazy" bootstraps a missing manifest with one GraphQL call
+    // and persists it — without this, the admin shows collections with
+    // EMPTY entry lists until a build-index CLI run. Right default for
+    // small sites; big collections should ship prebuilt indexes instead.
+    list: { rebuild: "lazy" },
   },
 
   auth: {
